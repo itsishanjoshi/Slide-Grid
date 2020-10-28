@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="add my-4">
+        <div class="header d-flex">
+            <button class="btn btn-danger" style="border-radius: 2rem;" (click)="add()">+</button>
+            <p class="m-2"><span class="mt-4">Add Employee</span></p>
+        </div>
+        <form class="my-3" [formGroup]="form" *ngIf="isHidden" (ngSubmit)="submit()">
+            <div class="form-group">
+                <input type="text"
+                formControlName="id"
+                class="form-control"
+                id="id"
+                placeholder="Enter ID"
+                >
+            </div>
+            <div class="form-group">
+                <input type="text"
+                formControlName="name"
+                class="form-control"
+                id="name"
+                placeholder="Enter Name">
+            </div>
+            <div class="form-group">
+                <input type="text"
+                formControlName="skills"
+                class="form-control"
+                id="skills"
+                placeholder="Enter Skills">
+            </div>
+            <div class="form-group">
+                <input type="text"
+                formControlName="gender"
+                class="form-control"
+                id="gender"
+                placeholder="Enter Gender">
+            </div>
+            <div class="form-group">
+                <input type="text"
+                formControlName="project"
+                class="form-control"
+                id="project"
+                placeholder="Enter Project">
+            </div>
+            <div class="form-group">
+                <input type="text"
+                formControlName="hcm"
+                class="form-control"
+                id="hcm"
+                placeholder="Enter HCM">
+            </div>
+            <button class="btn btn-success">SUBMIT</button>
+        </form>
+    </div>
+    <div class="table-responsove-sm">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <th scope="col" *ngFor="let head of header">{{ head }}</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let entry of content; let i = index">
+                    <td>{{ entry.id }}</td>
+                    <td>{{ entry.name }}</td>
+                    <td>
+                        <span *ngIf="!edit[i]">{{ entry.skills }}</span>
+                        <span *ngIf="edit[i]">
+                            <input type="text"
+                            [(ngModel)]="entry.skills"
+                            class="form-control"
+                            required
+                            >
+                        </span>
+                    
+                    </td>
+                    <td>{{ entry.gender }}</td>
+                    <td>{{ entry.project }}</td>
+                    <td>{{ entry.hcm }}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm m-1" (click)="deleteData(entry)">DELETE</button>
+                        <button class="btn btn-primary btn-sm m-1" (click)="updateData(i)">UPDATE</button>
+                        <button class="btn btn-success btn-sm m-1" (click)="save(i)">SAVE</button>
+                    </td>
+                </tr>   
+            </tbody>
+        </table>
+    </div>
+</div>
